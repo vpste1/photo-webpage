@@ -23,7 +23,7 @@ class PhotoCard extends React.Component { // eslint-disable-line react/prefer-st
       <div ref={(c) => (this.container = c)}>
         <Wrapper>
           <div className="photo-card">
-            <Image src={this.props.source} onLoad={this.props.onLoad} />
+            <Image src={this.props.source} onLoad={this.props.onLoad} onClick={this.props.onClick} />
           </div>
         </Wrapper>
       </div>
@@ -33,6 +33,7 @@ class PhotoCard extends React.Component { // eslint-disable-line react/prefer-st
 
 PhotoCard.propTypes = {
   source: PropTypes.string,
+  onClick: PropTypes.func,
   onLoad: PropTypes.func,
 };
 

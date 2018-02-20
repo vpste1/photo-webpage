@@ -14,7 +14,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PhotoCard from 'components/PhotoCard';
 import HeaderBar from 'components/HeaderBar';
-import { Grid, Row, Col, Modal, Button } from 'react-bootstrap/lib';
+import { Grid, Row, Col, Button } from 'react-bootstrap/lib';
+import { Modal } from 'antd';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -37,9 +38,11 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
       activePage: null,
       loadedItems: [],
       showModal: false,
+      modalUrl: '',
     };
     this.onLoad = this.onLoad.bind(this);
     this.onPhotoClick = this.onPhotoClick.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
   componentDidMount() {
     // console.log('MOUNT');
@@ -51,7 +54,7 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
     this.setState({ activePage: index });
   }
   onPhotoClick(event) {
-    // console.log('show modal');
+    console.log('show modal');
     this.setState({ modalUrl: event.target.src });
     this.setState({ showModal: true });
   }
@@ -59,6 +62,11 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
   onLoad(feedItem) {
     feedItem.persist();
     this.setState(() => ({ loadedItems: this.state.loadedItems.concat(feedItem.target.src) }));
+  }
+
+  handleCloseModal() {
+    this.setState({ modalUrl: '' });
+    this.setState({ showModal: false });
   }
   render() {
     const { titleList, urlList, dataRetrieved } = this.props;
@@ -76,21 +84,13 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
       ));
     return (
       <Wrapper>
-        <div className="photo-canvas">
-          <Modal show={showModal} onHide={this.handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <h4>Text in a modal</h4>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.handleClose}>Close</Button>
-            </Modal.Footer>
-          </Modal>
+
+        <div className="header-title">
           <h1>
             <FormattedMessage {...messages.header} />
           </h1>
+        </div>
+        <div className="photo-canvas">
           <Grid fluid>
             <TransitionGroup>
               {dataRetrieved && (<HeaderBar titles={titleList} onButtonClick={this.onButtonClick} />)}
@@ -102,6 +102,19 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
         </div>
         <div className="hidden">
           {photoLoader[activePage]}
+        </div>
+        <div className="modal-wrapper" >
+          <Modal
+            visible={showModal}
+            onCancel={this.handleCloseModal}
+            footer={null}
+            width={'80%'}
+            closable={false}
+          >
+            <div className="modal-image-wrapper">
+              <img style={{ display: 'block', margin: '0 auto', maxHeight: '600px', maxWidth: '100%', objectFit: 'cover', overflow: 'hidden' }} alt="" src={this.state.modalUrl} className="modal-image" />
+            </div>
+          </Modal>
         </div>
       </Wrapper>
     );
