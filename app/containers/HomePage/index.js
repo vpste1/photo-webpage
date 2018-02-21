@@ -12,6 +12,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import MediaQuery from 'react-responsive';
 import PhotoCard from 'components/PhotoCard';
 import HeaderBar from 'components/HeaderBar';
 import { Grid, Row, Col } from 'react-bootstrap/lib';
@@ -38,6 +39,7 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
       activePage: null,
       loadedItems: [],
       showPageSpinner: false,
+      showModalSpinner: false,
       showModal: false,
       modalUrl: '',
       modalImageLoaded: false,
@@ -60,6 +62,7 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
     console.log('show modal');
     this.setState({ modalUrl: event.target.src });
     this.setState({ showModal: true });
+    // this.setState({ showModalSpinner: true });
   }
 
   onLoad(feedItem) {
@@ -70,7 +73,7 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
 
   onModalImageLoad() {
     console.log('modal image loaded');
-    // this.setState({ modalImageLoaded: true });
+    // this.setState({ showModalSpinner: false });
   }
 
   handleCloseModal() {
@@ -80,7 +83,7 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
   }
   render() {
     const { titleList, urlList, dataRetrieved } = this.props;
-    const { activePage, loadedItems, showModal, modalImageLoaded, showPageSpinner } = this.state;
+    const { activePage, loadedItems, showModal, showPageSpinner } = this.state;
 
     const photoLoader = urlList.map((regionList) => (regionList.map((url) => (
       <img alt="" src={url} onLoad={this.onLoad} key={`${url}`} />
@@ -95,7 +98,7 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
     const photosLoadIcon = <Icon type="loading" style={{ fontSize: 24, color: 'white' }} spin />;
     const pageSpinner = <div className="page-spinner"><Spin indicator={photosLoadIcon} /></div>;
     // const modalLoadIcon = <Icon type="loading" style={{ fontSize: 24, color: '#3A3535' }} spin />;
-    console.log(loadedItems.length);
+    // const modalSpinner = <div className="modal-spinner"><Spin indicator={modalLoadIcon} /></div>;
     return (
       <Wrapper>
         <div className="header-title">
@@ -117,25 +120,24 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
         <div className="hidden">
           {photoLoader[activePage]}
         </div>
-        <div className="modal-wrapper" >
-          <Modal
-            visible={showModal}
-            onCancel={this.handleCloseModal}
-            footer={null}
-            width={'80%'}
-            closable={false}
-          >
-            <div className="modal-image-wrapper">
-              <img
-                style={{ display: 'block', margin: '0 auto', maxHeight: '600px', maxWidth: '100%', objectFit: 'cover', overflow: 'hidden' }}
-                alt=""
-                src={this.state.modalUrl}
-                className="modal-image"
-                onLoad={this.onModalImageLoad}
-              />
-            </div>
-          </Modal>
-        </div>
+        <Modal
+          visible={showModal}
+          onCancel={this.handleCloseModal}
+          footer={null}
+          width={'80%'}
+          closable={false}
+        >
+          {/* {showModalSpinner && modalSpinner} */}
+          <div className="modal-image-wrapper">
+            <img
+              style={{ display: 'block', margin: '0 auto', maxHeight: '600px', maxWidth: '100%', objectFit: 'cover', overflow: 'hidden' }}
+              alt=""
+              src={this.state.modalUrl}
+              className="modal-image"
+              onLoad={this.onModalImageLoad}
+            />
+          </div>
+        </Modal>
       </Wrapper>
     );
   }

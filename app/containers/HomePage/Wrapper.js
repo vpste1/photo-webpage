@@ -15,6 +15,11 @@ text-align: center;
   padding-top: 50px;
 }
 
+.modal-wrapper .modal-spinner {
+  text-align: center;
+  padding-top: 50px;
+}
+
 .photo-canvas {
   background-color: #3A3535;
   height: 100%;
