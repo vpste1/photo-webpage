@@ -14,8 +14,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PhotoCard from 'components/PhotoCard';
 import HeaderBar from 'components/HeaderBar';
-import { Grid, Row, Col, Button } from 'react-bootstrap/lib';
-import { Modal } from 'antd';
+import { Grid, Row, Col } from 'react-bootstrap/lib';
+import { Modal, Spin, Icon } from 'antd';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -37,8 +37,10 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
     this.state = {
       activePage: null,
       loadedItems: [],
+      showPageSpinner: false,
       showModal: false,
       modalUrl: '',
+      modalImageLoaded: false,
     };
     this.onLoad = this.onLoad.bind(this);
     this.onPhotoClick = this.onPhotoClick.bind(this);
@@ -52,6 +54,7 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
     // console.log('buttonclick', index);
     this.setState({ loadedItems: [] });
     this.setState({ activePage: index });
+    this.setState({ showPageSpinner: true });
   }
   onPhotoClick(event) {
     console.log('show modal');
@@ -61,16 +64,22 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
 
   onLoad(feedItem) {
     feedItem.persist();
+    this.setState({ showPageSpinner: false });
     this.setState(() => ({ loadedItems: this.state.loadedItems.concat(feedItem.target.src) }));
   }
 
   handleCloseModal() {
     this.setState({ modalUrl: '' });
     this.setState({ showModal: false });
+    this.setState({ modalImageLoaded: false });
+  }
+  onModalImageLoad() {
+    console.log('modal image loaded');
+    this.setState({ modalImageLoaded: true });
   }
   render() {
     const { titleList, urlList, dataRetrieved } = this.props;
-    const { activePage, loadedItems, showModal } = this.state;
+    const { activePage, loadedItems, showModal, modalImageLoaded, showPageSpinner } = this.state;
 
     const photoLoader = urlList.map((regionList) => (regionList.map((url) => (
       <img alt="" src={url} onLoad={this.onLoad} key={`${url}`} />
@@ -82,9 +91,12 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
            <PhotoCard key={url} source={url} onClick={this.onPhotoClick} />
          </Col>
       ));
+    const photosLoadIcon = <Icon type="loading" style={{ fontSize: 24, color: 'white' }} spin />;
+    const pageSpinner = <div className="page-spinner"><Spin indicator={photosLoadIcon} /></div>;
+    // const modalLoadIcon = <Icon type="loading" style={{ fontSize: 24, color: '#3A3535' }} spin />;
+    console.log(loadedItems.length);
     return (
       <Wrapper>
-
         <div className="header-title">
           <h1>
             <FormattedMessage {...messages.header} />
@@ -100,6 +112,7 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
             </TransitionGroup>
           </Grid>
         </div>
+        {showPageSpinner && pageSpinner}
         <div className="hidden">
           {photoLoader[activePage]}
         </div>
@@ -112,7 +125,13 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
             closable={false}
           >
             <div className="modal-image-wrapper">
-              <img style={{ display: 'block', margin: '0 auto', maxHeight: '600px', maxWidth: '100%', objectFit: 'cover', overflow: 'hidden' }} alt="" src={this.state.modalUrl} className="modal-image" />
+              <img
+                style={{ display: 'block', margin: '0 auto', maxHeight: '600px', maxWidth: '100%', objectFit: 'cover', overflow: 'hidden' }}
+                alt=""
+                src={this.state.modalUrl}
+                className="modal-image"
+                onLoad={this.onModalImageLoad}
+              />
             </div>
           </Modal>
         </div>

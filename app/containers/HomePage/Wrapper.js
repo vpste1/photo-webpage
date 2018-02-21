@@ -17,8 +17,13 @@ text-align: center;
 .modal-wrapper {
   width: 100%;
 }
-.ant-modal {
-  width: 100%;
+.ant-modal-body {
+  text-align: center;
+}
+
+.page-spinner {
+  text-align: center;
+  padding-top: 50px;
 }
 
 .ant-modal-body .modal-image-wrapper img {
@@ -33,6 +38,7 @@ text-align: center;
   background-color: #3A3535;
   height: 100%;
   color: white;
+  text-align: center;
 }
 
 .header-text {
