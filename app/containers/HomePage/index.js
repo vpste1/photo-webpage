@@ -68,14 +68,15 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
     this.setState(() => ({ loadedItems: this.state.loadedItems.concat(feedItem.target.src) }));
   }
 
+  onModalImageLoad() {
+    console.log('modal image loaded');
+    // this.setState({ modalImageLoaded: true });
+  }
+
   handleCloseModal() {
     this.setState({ modalUrl: '' });
     this.setState({ showModal: false });
     this.setState({ modalImageLoaded: false });
-  }
-  onModalImageLoad() {
-    console.log('modal image loaded');
-    this.setState({ modalImageLoaded: true });
   }
   render() {
     const { titleList, urlList, dataRetrieved } = this.props;

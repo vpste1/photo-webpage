@@ -10,28 +10,9 @@ text-align: center;
   color: white;
 }
 
-
-.modal{
-  display: block;
-}
-.modal-wrapper {
-  width: 100%;
-}
-.ant-modal-body {
-  text-align: center;
-}
-
 .page-spinner {
   text-align: center;
   padding-top: 50px;
-}
-
-.ant-modal-body .modal-image-wrapper img {
-  width: 100%;
-}
-
-.ant-modal-content {
-  color: blue;
 }
 
 .photo-canvas {
@@ -41,9 +22,6 @@ text-align: center;
   text-align: center;
 }
 
-.header-text {
-  text-align: center;
-}
 .hidden {
   display: none;
 }
