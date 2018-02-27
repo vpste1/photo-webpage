@@ -12,7 +12,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import MediaQuery from 'react-responsive';
 import PhotoCard from 'components/PhotoCard';
 import HeaderBar from 'components/HeaderBar';
 import { Grid, Row, Col } from 'react-bootstrap/lib';
@@ -97,7 +96,7 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
       ));
     const photosLoadIcon = <Icon type="loading" style={{ fontSize: 24, color: 'white' }} spin />;
     const pageSpinner = <div className="page-spinner"><Spin indicator={photosLoadIcon} /></div>;
-    // const modalLoadIcon = <Icon type="loading" style={{ fontSize: 24, color: '#3A3535' }} spin />;
+    // const modalLoadIcon = <Icon type="loading" style={{ fontSize: 24, color: '#3a3535' }} spin />;
     // const modalSpinner = <div className="modal-spinner"><Spin indicator={modalLoadIcon} /></div>;
     return (
       <Wrapper>
