@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Container [App] - reducers should handle the defaultAction action correctly 1`] = `
+Immutable.Map {
+  activePage: null,
+  dataRetrieved: false,
+  titleList: Immutable.List [
+  ],
+  urlList: Immutable.List [
+  ],
+}
+`;
+
+exports[`Container [App] - reducers should handle the pageLoadAction action correctly 1`] = `
+Immutable.Map {
+  activePage: null,
+  dataRetrieved: false,
+  titleList: Immutable.List [
+  ],
+  urlList: Immutable.List [
+  ],
+}
+`;
+
+exports[`Container [App] - reducers should handle the retrieveURLsFailure action correctly 1`] = `
+Immutable.Map {
+  activePage: null,
+  dataRetrieved: false,
+  titleList: Immutable.List [
+  ],
+  urlList: Immutable.List [
+  ],
+}
+`;
+
+exports[`Container [App] - reducers should handle the retrieveURLsSuccess action correctly 1`] = `
+Immutable.Map {
+  activePage: null,
+  dataRetrieved: true,
+  titleList: undefined,
+  urlList: undefined,
+}
+`;
+
+exports[`Container [App] - reducers should return the initial state 1`] = `
+Immutable.Map {
+  activePage: null,
+  dataRetrieved: false,
+  titleList: Immutable.List [
+  ],
+  urlList: Immutable.List [
+  ],
+}
+`;
