@@ -9,6 +9,7 @@ import {
   DEFAULT_ACTION,
   PAGE_LOAD,
   URL_SUCCESS,
+  URL_FAIL,
 } from './constants';
 
 const initialState = fromJS({
@@ -33,6 +34,8 @@ function homePageReducer(state = initialState, action) {
           .set('dataRetrieved', true)
           .set('urlList', action.payload.imageUrls)
           .set('titleList', action.payload.titles);
+    case URL_FAIL:
+      return state;
     default:
       return state;
   }
