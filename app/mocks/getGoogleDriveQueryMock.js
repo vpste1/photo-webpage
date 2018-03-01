@@ -1,3 +1,35 @@
+export const getRefreshToken =
+  {
+    data:
+  { access_token: 'ya29.GlxxBb4HdMJlo_bqQCFlPzGJTRnUXveF4PmEYqp-w2XC1aYNwRVztcEvcb4YYXDx-plpe14bDVpC91ZhfFZ7Y1A1NtACc9oS_VV7s3ppmQFF7asgI4649efulIH59g', token_type: 'Bearer', expires_in: 3600 },
+    status: 200,
+    statusText: '',
+    headers: {
+      date: 'Thu, 01 Mar 2018 05:02:43 GMT',
+      'content-encoding': 'gzip',
+      'content-length': '200',
+      pragma: 'no-cache',
+      expires: 'Mon, 01 Jan 1990 00:00:00 GMT',
+      server: 'GSE',
+      'content-type': 'application/json; charset=UTF-8',
+      vary: 'Origin, X-Origin',
+      'cache-control': 'no-cache, no-store, max-age=0, must-revalidate',
+    },
+    config: {
+      transformRequest: {},
+      transformResponse: {},
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      headers: { Accept: 'application/json, text/plain, */*', 'Content-Type': 'application/json;charset=utf-8' },
+      baseURL: 'https://www.googleapis.com/oauth2/v4',
+      method: 'post',
+      url: 'https://www.googleapis.com/oauth2/v4/token?client_id=176692766387-a17k03vkeg3jbkgh3rjslnnlv1if1v28.apps.googleusercontent.com&client_secret=w52R3qCi5iiCNY_ToEpUtplh&refresh_token=1/YEFQ_GC-IbEauYPBZ6HPleAV5IU0jkF_ytX0dmg8fNQ&grant_type=refresh_token',
+      data: '{"client_id":"176692766387-a17k03vkeg3jbkgh3rjslnnlv1if1v28.apps.googleusercontent.com","client_secret":"w52R3qCi5iiCNY_ToEpUtplh","refresh_token":"1/YEFQ_GC-IbEauYPBZ6HPleAV5IU0jkF_ytX0dmg8fNQ","grant_type":"refresh_token"}' },
+    request: {},
+  };
+
 export const getFoldersPlainSuccess =
   {
     data:

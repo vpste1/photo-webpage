@@ -1,9 +1,13 @@
 import moxios from 'moxios';
-// import sinon from 'sinon';
+import sinon from 'sinon';
 
 import { refreshTokenConfig,
-        googleAuthConfig,
-         } from '../googleDrive';
+         googleAuthConfig,
+         refreshToken } from '../googleDrive';
+
+import { getFoldersPlainSuccess,
+         getFoldersDataPlainSuccess,
+       } from '../../mocks/getGoogleDriveQueryMock';
 
 describe('googleDrive', () => {
   beforeEach(() => {
@@ -12,15 +16,23 @@ describe('googleDrive', () => {
   afterEach(() => {
     moxios.uninstall();
   });
-
-  // it('parseResults', (done) => {
-  //   const responseSuccess = { status: 200, data: { a: 'a', b: 'b', hits: { hits: [], max_score: 10, total: 0 } } };
-  //   const parseSuccess = { hits: 0, max_score: 10, items: [] };
-  //   const responseFailure = { status: 404 };
-  //   expect(parseResults(responseSuccess)).toMatchObject(parseSuccess);
-  //   expect(parseResults(responseFailure)).toBe(null);
-  //   done();
-  // });
+  it('refreshToken', (done) => {
+    const onFulfilled = sinon.spy();
+    refreshToken().then(onFulfilled);
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      // Override with a mocked response via a specified payload.
+      request.respondWith({
+        status: 200,
+        response: getSearchPlainSuccess,
+      }).then(() => {
+        const requestParsed = JSON.parse(request.config.data);
+        expect(requestParsed.query.bool.should[0].match_phrase_prefix.name.query).toBe('chocolate');
+        expect(onFulfilled.getCall(0).args[0]).toMatchObject(getSearchParsedSuccess);
+        done();
+      });
+    });
+  });
 
   it('refresh token via GET request', (done) => {
     expect(refreshTokenConfig()).toEqual({ baseURL: 'https://www.googleapis.com/oauth2/v4' });
