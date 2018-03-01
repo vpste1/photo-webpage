@@ -33,9 +33,10 @@ export function refreshToken() {
   const path = '/token?client_id=176692766387-a17k03vkeg3jbkgh3rjslnnlv1if1v28.apps.googleusercontent.com&client_secret=w52R3qCi5iiCNY_ToEpUtplh&refresh_token=1/YEFQ_GC-IbEauYPBZ6HPleAV5IU0jkF_ytX0dmg8fNQ&grant_type=refresh_token';
   const authSession = axios.create(refreshTokenConfig());
   return authSession.post(path, parameters)
-  .then((response) =>
-    // console.log('respsonse:', response);
-     response);
+  .then((response) => {
+    console.log('refreshToken respsonse:', response);
+    return response;
+  });
 }
 
 export function retrieveFolders(token) {
@@ -44,9 +45,10 @@ export function retrieveFolders(token) {
   const path = '/children';
   const authSession = axios.create(googleAuthConfig(token, '1Iv8dHdXs7Vvdz0PC9lnU2fE-oBmXOIlh'));
   return authSession.get(path)
-  .then((response) =>
-    // console.log('retrieveFolders respsonse:', response);
-     response);
+  .then((response) => {
+    console.log('retrieveFolders respsonse:', response);
+    return response;
+  });
 }
 
 export function retrieveFolderData(token, folderId, path) {
@@ -56,7 +58,8 @@ export function retrieveFolderData(token, folderId, path) {
   // console.log(folderId);
   const authSession = axios.create(googleAuthConfig(token, folderId));
   return authSession.get(path)
-  .then((response) =>
-    // console.log('retrieveFolders respsonse:', response);
-     response.data);
+  .then((response) => {
+    console.log('retrieveFoldersData respsonse:', response);
+    return response.data;
+  });
 }

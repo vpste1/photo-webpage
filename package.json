@@ -257,6 +257,7 @@
     "ip": "1.1.5",
     "lodash": "4.17.4",
     "minimist": "1.2.0",
+    "moxios": "^0.4.0",
     "prop-types": "15.6.0",
     "react": "16.2.0",
     "react-addons-transition-group": "^15.6.2",
