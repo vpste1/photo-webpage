@@ -5,9 +5,9 @@ import { refreshTokenConfig,
          googleAuthConfig,
          refreshToken } from '../googleDrive';
 
-import { getFoldersPlainSuccess,
-         getFoldersDataPlainSuccess,
-       } from '../../mocks/getGoogleDriveQueryMock';
+import { getRefreshToken,
+         getFoldersPlainSuccess,
+         getFoldersDataPlainSuccess } from '../../mocks/getGoogleDriveQueryMock';
 
 describe('googleDrive', () => {
   beforeEach(() => {
@@ -22,10 +22,7 @@ describe('googleDrive', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       // Override with a mocked response via a specified payload.
-      request.respondWith({
-        status: 200,
-        response: getSearchPlainSuccess,
-      }).then(() => {
+      request.respondWith(getRefreshToken).then(() => {
         const requestParsed = JSON.parse(request.config.data);
         expect(requestParsed.query.bool.should[0].match_phrase_prefix.name.query).toBe('chocolate');
         expect(onFulfilled.getCall(0).args[0]).toMatchObject(getSearchParsedSuccess);
