@@ -27,9 +27,6 @@ describe('googleDrive', () => {
         status: 200,
         response: getRefreshToken,
       }).then(() => {
-        console.log('&&&&&');
-        console.log(onFulfilled.getCall(0).args[0].data);
-        console.log('*****');
         expect(onFulfilled.getCall(0).args[0].data).toMatchObject(getRefreshToken);
         done();
       });
