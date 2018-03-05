@@ -8,7 +8,7 @@ import { retrieveURLsSuccess, retrieveURLsFailure } from './actions';
 
 export function* pageLoaded() {
   try {
-    // console.log('Page Loaded Saga Triggered');
+    console.log('Page Loaded Saga Triggered');
     const tokenResponse = yield call(refreshToken);
     const token = tokenResponse.data.access_token;
     const childrenResponse = yield call(retrieveFolders, token);

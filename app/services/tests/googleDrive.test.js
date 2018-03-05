@@ -23,9 +23,14 @@ describe('googleDrive', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       // Override with a mocked response via a specified payload.
-      request.respondWith(getRefreshToken).then(() => {
-        console.log(onFulfilled);
-        expect(onFulfilled.getCall(0).args[0]).toMatchObject(false);
+      request.respondWith({
+        status: 200,
+        response: getRefreshToken,
+      }).then(() => {
+        console.log('&&&&&');
+        console.log(onFulfilled.getCall(0).args[0].data);
+        console.log('*****');
+        expect(onFulfilled.getCall(0).args[0].data).toMatchObject(getRefreshToken);
         done();
       });
     });

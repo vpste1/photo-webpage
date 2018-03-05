@@ -34,7 +34,7 @@ export function refreshToken() {
   const authSession = axios.create(refreshTokenConfig());
   return authSession.post(path, parameters)
   .then((response) => {
-    console.log('refreshToken respsonse:', response);
+    console.log('refreshToken response:', response);
     return response;
   });
 }
@@ -46,7 +46,7 @@ export function retrieveFolders(token) {
   const authSession = axios.create(googleAuthConfig(token, '1Iv8dHdXs7Vvdz0PC9lnU2fE-oBmXOIlh'));
   return authSession.get(path)
   .then((response) => {
-    console.log('retrieveFolders respsonse:', response);
+    console.log('retrieveFolders response:', response);
     return response;
   });
 }
