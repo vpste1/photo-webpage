@@ -9,15 +9,10 @@ const selectHomePageDomain = (state) => state.get('homepage');
  * Other specific selectors
  */
 
-const makeSelectHomePage = () => createSelector(
-   selectHomePageDomain,
-   (substate) => substate.toJS()
- );
-
-const makeSelectActivePage = () => createSelector(
-  selectHomePageDomain,
-  (substate) => substate.get('activePage')
-);
+// const makeSelectHomePage = () => createSelector(
+//    selectHomePageDomain,
+//    (substate) => substate.toJS()
+//  );
 
 const makeSelectDataRetrieved = () => createSelector(
   selectHomePageDomain,
@@ -34,10 +29,9 @@ const makeSelectUrlList = () => createSelector(
   (substate) => substate.get('urlList')
 );
 
-export default makeSelectHomePage;
+// export default makeSelectHomePage;
 export {
   selectHomePageDomain,
-  makeSelectActivePage,
   makeSelectDataRetrieved,
   makeSelectTitleList,
   makeSelectUrlList,
