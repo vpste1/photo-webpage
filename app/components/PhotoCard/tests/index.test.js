@@ -16,7 +16,6 @@ describe('<PhotoCard />', () => {
     const renderedComponent = shallow(
       <PhotoCard />
     );
-    console.log(renderedComponent);
     expect(
       renderedComponent.find('img').node
     ).toBeDefined();

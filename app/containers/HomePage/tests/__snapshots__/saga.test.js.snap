@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Container [App] - sagas pageLoaded Saga should dispatch retrieveURLsFailure action if an error is thrown 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [],
+    "context": null,
+    "fn": [Function],
+  },
+}
+`;
+
+exports[`Container [App] - sagas pageLoaded Saga should dispatch retrieveURLsFailure action if an error is thrown 2`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "PUT": Object {
+    "action": Object {
+      "type": "app/HomePage/URL_FAIL",
+    },
+    "channel": null,
+  },
+}
+`;
+
+exports[`Container [App] - sagas pageLoaded Saga should dispatch retrieveURLsSuccess action if the API is hit successfully 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [],
+    "context": null,
+    "fn": [Function],
+  },
+}
+`;
+
+exports[`Container [App] - sagas pageLoaded Saga should dispatch retrieveURLsSuccess action if the API is hit successfully 2`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "PUT": Object {
+    "action": Object {
+      "type": "app/HomePage/URL_FAIL",
+    },
+    "channel": null,
+  },
+}
+`;
