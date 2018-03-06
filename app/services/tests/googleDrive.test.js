@@ -3,11 +3,13 @@ import sinon from 'sinon';
 
 import { refreshTokenConfig,
          googleAuthConfig,
-         refreshToken } from '../googleDrive';
+         refreshToken,
+         retrieveFolders,
+         retrieveFolderData } from '../googleDrive';
 
 import { getRefreshToken,
-         // getFoldersPlainSuccess,
-         // getFoldersDataPlainSuccess,
+         getFoldersPlainSuccess,
+         getFoldersDataPlainSuccess,
        } from '../../mocks/getGoogleDriveQueryMock';
 
 describe('googleDrive', () => {
@@ -28,6 +30,38 @@ describe('googleDrive', () => {
         response: getRefreshToken,
       }).then(() => {
         expect(onFulfilled.getCall(0).args[0].data).toMatchObject(getRefreshToken);
+        done();
+      });
+    });
+  });
+// TODO: test token insertion
+  it('retrieveFolders', (done) => {
+    const onFulfilled = sinon.spy();
+    retrieveFolders('tokenString').then(onFulfilled);
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      // Override with a mocked response via a specified payload.
+      request.respondWith({
+        status: 200,
+        response: getFoldersPlainSuccess,
+      }).then(() => {
+        expect(onFulfilled.getCall(0).args[0].data).toMatchObject(getFoldersPlainSuccess);
+        done();
+      });
+    });
+  });
+// TODO: test token insertion
+  it('retrieveFolderData', (done) => {
+    const onFulfilled = sinon.spy();
+    retrieveFolderData().then(onFulfilled);
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      // Override with a mocked response via a specified payload.
+      request.respondWith({
+        status: 200,
+        response: getFoldersDataPlainSuccess,
+      }).then(() => {
+        expect(onFulfilled.getCall(0).args[0]).toMatchObject(getFoldersDataPlainSuccess);
         done();
       });
     });
